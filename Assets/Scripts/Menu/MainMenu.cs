@@ -12,12 +12,22 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private AudioMixer audioMixer;
 
+    private const string VolumePrefKey = "VolumePreference";
+
     private void Start()
     {
         if (mainMenuUI != null)
             mainMenuUI.SetActive(true);
         if (optionsMenuUI != null)
             optionsMenuUI.SetActive(false);
+
+        if (PlayerPrefs.HasKey(VolumePrefKey))
+        {
+            float savedVolume = PlayerPrefs.GetFloat(VolumePrefKey);
+            volumeSlider.value = savedVolume;
+        }
+
+        ApplyVolume(volumeSlider.value);
     }
 
     public void Play(string sceneName) 
@@ -35,7 +45,15 @@ public class MainMenu : MonoBehaviour
 
     public void VolumeSlider()
     {
-        float clampedValue = Mathf.Clamp(volumeSlider.value, 0.0001f, 1f);
+        ApplyVolume(volumeSlider.value);
+
+        PlayerPrefs.SetFloat(VolumePrefKey, volumeSlider.value);
+        PlayerPrefs.Save();
+    }
+
+    private void ApplyVolume(float sliderValue)
+    {
+        float clampedValue = Mathf.Clamp(sliderValue, 0.0001f, 1f);
         
         float volumeInDecibels = Mathf.Log10(clampedValue) * 20f;
         

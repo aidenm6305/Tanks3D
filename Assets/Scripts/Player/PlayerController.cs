@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector3 velocity;
 
+    [SerializeField]
+    private AudioSource moveSource;
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -61,5 +64,14 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (moveInput.magnitude > 0)
+        {
+            AudioManager.Instance.PlayMove(moveSource);
+        }
+        else
+        {
+            AudioManager.Instance.StopMove(moveSource);
+        }
     }
 }
