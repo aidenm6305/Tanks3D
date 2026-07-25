@@ -22,13 +22,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == playerWhoShot)
+        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
         {
             return;
         }
+
         bulletParticleSystem.Play();
         Debug.Log("Bullet collided with: " + collision.gameObject.name);
         Destroy(gameObject, bulletParticleSystem.main.duration);
-        
     }
 }
