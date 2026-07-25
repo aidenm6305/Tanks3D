@@ -13,10 +13,11 @@ public class Bullet : MonoBehaviour
     private ParticleSystem bulletParticleSystem;
     protected bool hasDoneDamage = false;
     private bool isBeingDestroyed = false;
-    
+    private Rigidbody rb;
     private void Start()
     {
         bulletParticleSystem = GetComponent<ParticleSystem>();
+        rb = GetComponent<Rigidbody>();
     }
     public void SetPlayerWhoShot(GameObject player)
     {
@@ -53,10 +54,10 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
     protected void DestroyBullet()
     {
         if (isBeingDestroyed) return;
-        isBeingDestroyed = true;
 
         bulletParticleSystem.Play();
         Destroy(gameObject, bulletParticleSystem.main.duration);
@@ -69,5 +70,8 @@ public class Bullet : MonoBehaviour
             return;
 
         hasDoneDamage = true;
+        HandleDamage(collision);
+        DestroyBullet();
+
     }
 }

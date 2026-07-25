@@ -37,7 +37,12 @@ public class BulletPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"Player picked up {bullet.name}!");
+            PlayerShoot playerShoot = other.GetComponentInParent<PlayerShoot>();
+            if (playerShoot != null && bullet != null)
+            {
+                playerShoot.SetNewBullet(bullet);
+            }
+
             spawner.addBackIndex(spawnIndex);
             Destroy(gameObject); 
         }

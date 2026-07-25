@@ -21,6 +21,10 @@ public class PlayerShoot: MonoBehaviour
         playerHealth = GetComponentInParent<PlayerHealth>();
     }
 
+    public void SetNewBullet(Bullet newBullet)
+    {
+        bullet = newBullet;
+    }
     private System.Collections.IEnumerator HandleCooldown()
     {
         isOnCooldown = true;
