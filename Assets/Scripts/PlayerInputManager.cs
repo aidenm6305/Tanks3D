@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,10 +6,11 @@ public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private int maxPlayers = 4;
 
     private bool wasdJoined = false;
     //private bool arrowsJoined = false;
-    private bool gamepadJoined = false;
+    private readonly HashSet<Gamepad> joinedGamepads = new();
 
     private int nextPlayerIndex = 0;
 
@@ -16,63 +18,42 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (Keyboard.current == null) return;
 
-        if (!wasdJoined && Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (!wasdJoined && Keyboard.current.spaceKey.wasPressedThisFrame && nextPlayerIndex < maxPlayers)
         {
-            var player = PlayerInput.Instantiate(playerPrefab,
-                controlScheme: "WASD",
-                pairWithDevice: Keyboard.current);
-            var splitScreen = player.GetComponent<SplitScreenCameraSetup>();
-            splitScreen.SetupPlayer(0);
-
-            nextPlayerIndex++;
-
-            player.GetComponent<Renderer>().material.color = GetRandomColor();
-            //player.GetComponent<PlayerController>().SetLabel("WASD Keyboard");
-
-            if (spawnPoints.Length > 0)
-            {
-                player.transform.position = spawnPoints[0].position;
-            }
-
+            SpawnPlayer(Keyboard.current, "WASD");
             wasdJoined = true;
         }
 
-        //if (!arrowsJoined && Keyboard.current.rightCtrlKey.wasPressedThisFrame)
-        //{
-        //    var player = PlayerInput.Instantiate(playerPrefab,
-        //        controlScheme: "Arrows",
-        //        pairWithDevice: Keyboard.current);
-
-        //    player.GetComponent<Renderer>().material.color = GetRandomColor();
-        //    player.GetComponent<PlayerController>().SetLabel("Arrows Keyboard");
-
-        //    if (spawnPoints.Length > 1)
-        //    {
-        //        player.transform.position = spawnPoints[1].position;
-        //    }
-
-        //    arrowsJoined = true;
-        //}
-
-        // loop through all connected gamepads and check if any of them have joined
         foreach (var gamePad in Gamepad.all)
         {
-            if (gamePad.buttonSouth.wasPressedThisFrame && !gamepadJoined)
+            if (nextPlayerIndex >= maxPlayers) break;
+
+            if (gamePad.buttonSouth.wasPressedThisFrame && joinedGamepads.Add(gamePad))
             {
-                var player = PlayerInput.Instantiate(playerPrefab,
-                    controlScheme: "Gamepad",
-                    pairWithDevice: gamePad);
-                var splitScreen = player.GetComponent<SplitScreenCameraSetup>();
-                splitScreen.SetupPlayer(nextPlayerIndex);
-
-                nextPlayerIndex++;
-
-                player.GetComponent<Renderer>().material.color = GetRandomColor();
-                //player.GetComponent<PlayerController>().SetLabel("Gamepad");
-
-                gamepadJoined = true;
+                SpawnPlayer(gamePad, "Gamepad");
             }
         }
+    }
+
+    private void SpawnPlayer(InputDevice device, string controlScheme)
+    {
+        int playerIndex = nextPlayerIndex;
+
+        var player = PlayerInput.Instantiate(
+            playerPrefab,
+            controlScheme: controlScheme,
+            pairWithDevice: device);
+
+        var splitScreen = player.GetComponent<SplitScreenCameraSetup>();
+        splitScreen.SetupPlayer(playerIndex);
+
+        if (spawnPoints.Length > playerIndex)
+        {
+            player.transform.position = spawnPoints[playerIndex].position;
+        }
+
+        player.GetComponent<Renderer>().material.color = GetRandomColor();
+        nextPlayerIndex++;
     }
 
     private static Color GetRandomColor()
