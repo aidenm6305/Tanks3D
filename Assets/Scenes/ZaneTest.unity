@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 470817212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.24992, y: 0, z: 29.10398}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,12 +443,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d7cc28ba0ce3d4d9ddb1e90ccef985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Map
-  baseWall: {fileID: 728621332842280841, guid: 805bf04f3b254c743954483e35c938c9, type: 3}
+  baseWall: {fileID: 3828072292719234740, guid: 72783f42614f3c84bbfe8950d47cd056, type: 3}
   edgeWall: {fileID: 7369163524042023206, guid: 1b51f310ba3219544b4cfe27c94374b3, type: 3}
   mainFloor: {fileID: 1377397544}
   density: 0.7
   wallFolder: {fileID: 1287963313}
   edgeWallFolder: {fileID: 470817212}
+  baseWallYOffset: -1.1
+  edgeWallYOffset: 0
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
@@ -540,7 +542,7 @@ Transform:
   m_GameObject: {fileID: 1287963313}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.24992, y: 0, z: 29.10398}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
