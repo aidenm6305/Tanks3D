@@ -446,7 +446,7 @@ MonoBehaviour:
   baseWall: {fileID: 728621332842280841, guid: 805bf04f3b254c743954483e35c938c9, type: 3}
   edgeWall: {fileID: 7369163524042023206, guid: 1b51f310ba3219544b4cfe27c94374b3, type: 3}
   mainFloor: {fileID: 1377397544}
-  density: 0.75
+  density: 0.7
   wallFolder: {fileID: 1287963313}
   edgeWallFolder: {fileID: 470817212}
 --- !u!4 &810528635
