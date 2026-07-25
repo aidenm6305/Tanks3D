@@ -3,8 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    //[SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float normalSpeed = 5f;
+    
+    [SerializeField] private float boostSpeed = 10f;
     [SerializeField] private float gravity = -9.8f;
 
     [Header("Tank Rotation Settings")]
@@ -21,14 +22,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioSource moveSource;
 
+    private float speed;
     void Awake()
     {
+        speed = normalSpeed;
         controller = GetComponent<CharacterController>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+    public void Boost(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            speed = boostSpeed;
+        }
+        else if (context.canceled)
+        {
+            speed = normalSpeed; 
+        }
     }
 
     //public void Jump(InputAction.CallbackContext context)
