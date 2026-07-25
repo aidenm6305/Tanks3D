@@ -30,14 +30,30 @@ public class Map : MonoBehaviour
 
     Vector3 wallScale;
     Vector3 floorScale;
+
+    private static Vector3 GetWorldSize(GameObject target)
+    {
+        var meshFilter = target.GetComponent<MeshFilter>();
+        if (meshFilter != null && meshFilter.sharedMesh != null)
+        {
+            return Vector3.Scale(meshFilter.sharedMesh.bounds.size, target.transform.lossyScale);
+        }
+
+        var renderer = target.GetComponent<Renderer>();
+        return renderer != null ? renderer.bounds.size : target.transform.lossyScale;
+    }
+
     void Start()
     {
 
-        wallScale = baseWall.transform.localScale;
-        floorScale = mainFloor.transform.localScale;
+        wallScale = GetWorldSize(baseWall);
+        floorScale = GetWorldSize(mainFloor);
 
-        startX = (int)MathF.Ceiling(floorScale.x);
-        startZ = (int)MathF.Ceiling(floorScale.z);
+        int cellCountX = Mathf.Max(1, Mathf.RoundToInt(floorScale.x / wallScale.x));
+        int cellCountZ = Mathf.Max(1, Mathf.RoundToInt(floorScale.z / wallScale.z));
+
+        startX = Mathf.CeilToInt(cellCountX / 2f);
+        startZ = Mathf.CeilToInt(cellCountZ / 2f);
 
         int itterX = startX;
         int itterZ = startZ;
@@ -46,9 +62,9 @@ public class Map : MonoBehaviour
         Debug.Log($"Start Position: {startX}, {startZ}");
         Debug.Log($"Density: {density}");
 
-        // * 2 as each path is 2 cells wide - 3 for the 4 edges (0th row is a edge so - 3)
-        List<List<MazeCell>> maze = mazeGenerator.MazePath(startX * 2 - 3, startZ * 2 - 3, seed: UnityEngine.Random.Range(1, 10000000), density: density);
-        float wallHeight = wallScale.y / 2;
+        // MazePath takes the interior size; the generator adds the outer border itself.
+        List<List<MazeCell>> maze = mazeGenerator.MazePath(cellCountX - 2, cellCountZ - 2, seed: UnityEngine.Random.Range(1, 10000000), density: density);
+        float wallHeight = wallScale.y / 2f;
 
         foreach (List<MazeCell> row in maze)
         {
@@ -66,6 +82,7 @@ public class Map : MonoBehaviour
                         folder.transform
                     );
 
+                    tempWall.isStatic = true;
                 }
                 itterX -= 1;
             }
