@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public bool isDead = false;
 
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject winScreen;
 
     private PlayerController playerController;
     private PlayerShoot playerShoot;
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         deathScreen.SetActive(false);
+        if (winScreen != null) winScreen.SetActive(false);
         health = maxHealth;
         isDead = false;
         UpdateHealthUI();
@@ -25,6 +27,7 @@ public class PlayerHealth : MonoBehaviour
         playerShoot = GetComponentInChildren<PlayerShoot>();
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.playersAlive++;
+        gameManager.totalPlayersJoined++;
     }
 
     public void TakeDamage(float damage)
@@ -58,5 +61,13 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         deathScreen.SetActive(true);
         gameManager.playersAlive--;
+    }
+
+    public void ShowWinScreen()
+    {
+        if (winScreen != null)
+        {
+            winScreen.SetActive(true);
+        }
     }
 }

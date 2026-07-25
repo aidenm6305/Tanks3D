@@ -2213,6 +2213,7 @@ MonoBehaviour:
   healthSlider: {fileID: 1868393890595392106}
   isDead: 0
   deathScreen: {fileID: 2785521814431752763}
+  winScreen: {fileID: 1844183945800478157}
 --- !u!82 &462473636896842624
 AudioSource:
   m_ObjectHideFlags: 0
