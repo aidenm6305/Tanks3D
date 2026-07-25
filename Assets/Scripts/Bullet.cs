@@ -29,6 +29,14 @@ public class Bullet : MonoBehaviour
 
         bulletParticleSystem.Play();
         Debug.Log("Bullet collided with: " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(10f);
+            }
+        }
         Destroy(gameObject, bulletParticleSystem.main.duration);
     }
 }
