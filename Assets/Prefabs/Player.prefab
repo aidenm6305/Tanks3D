@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5727fee723fb44b9865f8c51191329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
-  bullet: {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
+  bullet: {fileID: 7816058691495053140, guid: 93ecbe9014600a2429905005f2b3fd93, type: 3}
   muzzleTransform: {fileID: 342403044544151038}
   myTankAudioSource: {fileID: 212696766352135162}
 --- !u!1 &2174890424045544445
@@ -328,9 +328,10 @@ GameObject:
   - component: {fileID: 6249781475069772738}
   - component: {fileID: 6686268986894736036}
   - component: {fileID: 6294682776991677016}
+  - component: {fileID: 1340675992590501777}
   m_Layer: 0
   m_Name: TankBottom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,6 +429,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1340675992590501777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174890424045544445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95936933111f49043986edc808826455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &3886664504221716287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8514837280520801700}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15212339, y: -0, z: -0, w: 0.98836154}
+  m_LocalRotation: {x: 0.15212339, y: 0, z: 0, w: 0.98836154}
   m_LocalPosition: {x: 0, y: 1.5035291, z: -4.7685847}
   m_LocalScale: {x: 2, y: 3.33, z: 1}
   m_ConstrainProportionsScale: 0

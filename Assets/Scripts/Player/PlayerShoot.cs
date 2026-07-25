@@ -7,6 +7,10 @@ public class PlayerShoot: MonoBehaviour
     [SerializeField] private Transform muzzleTransform;
 
     public AudioSource myTankAudioSource;
+    public void SetBullet(Bullet newBullet)
+    {
+        bullet = newBullet;
+    }
 
     public void Shoot(InputAction.CallbackContext context)
     {
