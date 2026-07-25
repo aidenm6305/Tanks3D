@@ -268,7 +268,7 @@ MonoBehaviour:
   speed: 5
   gravity: -9.8
   treadsTransform: {fileID: 999336929867472172}
-  rotationSpeed: 10
+  rotationSpeed: 100
 --- !u!114 &8436879323778115536
 MonoBehaviour:
   m_ObjectHideFlags: 0
