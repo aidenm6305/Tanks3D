@@ -38,20 +38,36 @@ public class PlayerInputManager : MonoBehaviour
     private void SpawnPlayer(InputDevice device, string controlScheme)
     {
         int playerIndex = nextPlayerIndex;
-
         var player = PlayerInput.Instantiate(
             playerPrefab,
             controlScheme: controlScheme,
-            pairWithDevice: device);
+            pairWithDevice: device
+        );
 
         var splitScreen = player.GetComponent<SplitScreenCameraSetup>();
         splitScreen.SetupPlayer(playerIndex);
 
         if (spawnPoints.Length > playerIndex)
         {
-            player.transform.position = spawnPoints[playerIndex].position;
-        }
+            Debug.Log($"Spawning player {playerIndex + 1} at spawn point {playerIndex}");
+            var spawnPoint = spawnPoints[playerIndex];
+            var characterController = player.GetComponent<CharacterController>();
 
+            characterController.enabled = false;
+
+            player.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+            characterController.enabled = true;
+
+            Debug.Log($"Player {playerIndex + 1} spawned at position: {player.transform.position}");
+
+        }
+        else
+        {
+            Debug.LogWarning($"Not enough spawn points for player {playerIndex + 1}. Using default position.");
+        }
+        Debug.Log(spawnPoints.Length);
+        
         player.GetComponent<Renderer>().material.color = GetRandomColor();
         var color = GetRandomColor();
         foreach (var mesh in player.GetComponentsInChildren<MeshRenderer>())
@@ -60,6 +76,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         nextPlayerIndex++;
     }
+
 
     private static Color GetRandomColor()
     {
