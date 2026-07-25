@@ -223,6 +223,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a83c1c7b-4593-4b6e-a131-09216e592d90
     m_ActionName: 'Gameplay/Look[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2950581188337304518}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Boost
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87d8b8c3-6f00-4862-823b-9ec361a7f2d4
+    m_ActionName: 'Gameplay/Boost[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -265,7 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d77fd31142e374b90df1d2cfe2aac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 5
+  normalSpeed: 5
+  boostSpeed: 10
   gravity: -9.8
   treadsTransform: {fileID: 999336929867472172}
   rotationSpeed: 100
@@ -1081,7 +1098,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8514837280520801700}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15212339, y: 0, z: 0, w: 0.98836154}
+  m_LocalRotation: {x: 0.15212339, y: -0, z: -0, w: 0.98836154}
   m_LocalPosition: {x: 0, y: 1.5035291, z: -4.7685847}
   m_LocalScale: {x: 2, y: 3.33, z: 1}
   m_ConstrainProportionsScale: 0
