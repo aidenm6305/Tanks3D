@@ -1,7 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System;
-using System.Text.RegularExpressions;
 
 public class Map : MonoBehaviour
 {
@@ -29,6 +29,17 @@ public class Map : MonoBehaviour
     [Tooltip("The offset for the wall's Y position")]
     [SerializeField] private float baseWallYOffset = 0; 
     [SerializeField] private float edgeWallYOffset = 0; 
+    
+
+    [Header("Bullet Spawns")]
+    [SerializeField] private float minSpawnTime = 1f;
+
+    [SerializeField] private float maxSpawnTime = 1f;
+
+    [SerializeField] private float startSpawnWaitTime = 1f;
+    [SerializeField] private BulletPickup bulletPickupPrefab;
+    
+    [SerializeField] private List<Bullet> pickupBullets;
     // Instance fields
     private MazeGenerator mazeGenerator = new MazeGenerator();
 
@@ -37,7 +48,8 @@ public class Map : MonoBehaviour
 
     Vector3 wallScale;
     Vector3 floorScale;
-
+    private Spawner spawner;
+    List<Vector3> pathLocations = new List<Vector3>();
     private static Vector3 GetWorldSize(GameObject target)
     {
         var meshFilter = target.GetComponent<MeshFilter>();
@@ -83,6 +95,7 @@ public class Map : MonoBehaviour
         {
             foreach (MazeCell cell in row)
             {
+                float yOffset = (cell == MazeCell.Border) ? edgeWallYOffset : baseWallYOffset;
                 if (cell != MazeCell.Path)
                 {
 
@@ -93,7 +106,6 @@ public class Map : MonoBehaviour
                             wallToInstantiate = baseWall;
                             break;
                         case MazeCell.BreakableWall:
-                            Debug.Log($"Instantiating breakable wall at: {itterX}, {itterZ}");
                             wallToInstantiate = breakableWall;
                             break;
                         case MazeCell.Border:
@@ -105,7 +117,6 @@ public class Map : MonoBehaviour
                     }
 
                     GameObject folder = (cell == MazeCell.Border) ? edgeWallFolder : wallFolder;
-                    float yOffset = (cell == MazeCell.Border) ? edgeWallYOffset : baseWallYOffset;
 
                     var tempWall = Instantiate(
                         wallToInstantiate,
@@ -116,11 +127,36 @@ public class Map : MonoBehaviour
 
                     tempWall.isStatic = true;
                 }
+                else
+                {
+                    Vector3 newLocation = new Vector3(itterX * wallScale.x - wallScale.x, wallHeight + yOffset, itterZ * wallScale.z - wallScale.z);
+                    Debug.Log($"Instantiating path at: {itterX}, {itterZ}");
+                    pathLocations.Add(newLocation);
+                }
                 itterX -= 1;
             }
 
             itterX = startX;
             itterZ -= 1;
         }
+        StartCoroutine(SpawnPickups());
     }
+
+
+
+    private IEnumerator SpawnPickups()
+    {
+        spawner = new Spawner(pathLocations, pickupBullets, Mathf.Min(wallScale.x, wallScale.z));
+        Debug.Log($"Spawn area size: {Mathf.Min(wallScale.x, wallScale.z)}");
+        yield return new WaitForSeconds(startSpawnWaitTime);
+        while (true)
+        {
+            spawner.placePickup(bulletPickupPrefab, true);
+            float spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
+            yield return new WaitForSeconds(spawnTime);
+
+        }
+    }
+
+
 }

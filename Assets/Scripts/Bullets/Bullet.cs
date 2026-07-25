@@ -3,11 +3,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
+    [SerializeField]
+    protected Sprite icon;
+
+    [SerializeField]
+    protected string bulletName = "Normal Bullet";
     public float speed = 30f;
     protected GameObject playerWhoShot;
     private ParticleSystem bulletParticleSystem;
     protected bool hasDoneDamage = false;
     private bool isBeingDestroyed = false;
+    
     private void Start()
     {
         bulletParticleSystem = GetComponent<ParticleSystem>();

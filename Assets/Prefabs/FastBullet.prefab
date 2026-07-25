@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 5840622765082230797}
   - component: {fileID: 7643106359086848431}
   - component: {fileID: 8222087696198575162}
-  - component: {fileID: -2246989145388903609}
+  - component: {fileID: 4876094351857569163}
   m_Layer: 0
-  m_Name: BouncyBullet
+  m_Name: FastBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4946,7 +4946,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &-2246989145388903609
+--- !u!114 &4876094351857569163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4955,10 +4955,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4780673504474862388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01ffe7aa1785552479daaeb91792f6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a296deecd2fbd84e87abea6ee83c0b9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BouncyBullet
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
   icon: {fileID: 0}
-  bulletName: Bouncy Bullet
-  speed: 30
-  bounceCount: 3
+  bulletName: Fast Bullet
+  speed: 50
