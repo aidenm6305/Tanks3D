@@ -53,6 +53,11 @@ public class PlayerInputManager : MonoBehaviour
         }
 
         player.GetComponent<Renderer>().material.color = GetRandomColor();
+        var color = GetRandomColor();
+        foreach (var mesh in player.GetComponentsInChildren<MeshRenderer>())
+        {
+            mesh.material.color = color;
+        }
         nextPlayerIndex++;
     }
 
