@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &317727937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317727939}
+  - component: {fileID: 317727938}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317727938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317727937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30b1cb72b5061b48a76627de093a655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playersAlive: 0
+  totalPlayersJoined: 0
+--- !u!4 &317727939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317727937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374326915
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +499,13 @@ MonoBehaviour:
   edgeWallFolder: {fileID: 470817212}
   baseWallYOffset: -4.4
   edgeWallYOffset: -4.4
+  minSpawnTime: 1
+  maxSpawnTime: 1
+  startSpawnWaitTime: 1
+  bulletPickupPrefab: {fileID: 7906097596365977989, guid: 84bbd97e581312c4ea8eee13ca15d493, type: 3}
+  pickupBullets:
+  - {fileID: 4876094351857569163, guid: b4300cc1fa17ecd43947d67e448ca009, type: 3}
+  - {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,3 +1095,4 @@ SceneRoots:
   - {fileID: 917354101}
   - {fileID: 374326919}
   - {fileID: 1696977167}
+  - {fileID: 317727939}
