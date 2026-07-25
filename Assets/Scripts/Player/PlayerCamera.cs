@@ -21,6 +21,7 @@ public class PlayerCamera : MonoBehaviour
 
     private Vector2 lookInput;
 
+    public AudioSource myTankAudioSource;
 
     void Start()
     {
@@ -38,6 +39,18 @@ public class PlayerCamera : MonoBehaviour
 
         if (cinemachineCamera == null)
             cinemachineCamera = GetComponent<CinemachineCamera>();
+    }
+
+    private void Update()
+    {
+        if (lookInput.sqrMagnitude > 0.01f)
+        {
+            AudioManager.Instance.PlayRotate(myTankAudioSource);
+        }
+        else
+        {
+            AudioManager.Instance.StopRotate(myTankAudioSource);
+        }
     }
 
     void LateUpdate()
