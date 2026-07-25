@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c00ad120af55f2a49b7aa2b39ad3f3ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4959,6 +4959,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BouncyBullet
   icon: {fileID: 0}
-  bulletName: Bouncy Bullet
+  bulletColor: {r: 0, g: 0.39768982, b: 1, a: 1}
   speed: 30
   bounceCount: 3

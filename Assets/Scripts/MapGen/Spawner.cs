@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
         Vector3 randomUnitCircle = Random.insideUnitCircle * squareSize * 0.5f;
         Vector3 spawnPosition = paths[pickupIndexes[tile]] + randomUnitCircle;
 
-        spawnPosition.y = 0.0f;
+        spawnPosition.y = obj.transform.position.y; 
 
         BulletPickup item = Instantiate(obj, spawnPosition, Quaternion.identity);
         item.SetSpawnIndexValue(pickupIndexes[tile], pickupBullets, this);

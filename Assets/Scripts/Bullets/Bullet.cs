@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     protected Sprite icon;
 
     [SerializeField]
+    public Color bulletColor = Color.white;
     protected string bulletName = "Normal Bullet";
     public float speed = 30f;
     protected GameObject playerWhoShot;
@@ -18,6 +19,13 @@ public class Bullet : MonoBehaviour
     {
         bulletParticleSystem = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
+
+        var meshRender = GetComponent<MeshRenderer>();
+        var mesh = meshRender.materials[0];
+        Material clonedTexture = Instantiate(mesh);
+        clonedTexture.color = bulletColor;
+        meshRender.material = clonedTexture;
+
     }
     public void SetPlayerWhoShot(GameObject player)
     {
@@ -31,6 +39,8 @@ public class Bullet : MonoBehaviour
 
     protected void HandleDamage(Collision collision)
     {
+        if (isBeingDestroyed) return;
+        
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
