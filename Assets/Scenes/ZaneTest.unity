@@ -449,6 +449,8 @@ MonoBehaviour:
   density: 0.7
   wallFolder: {fileID: 1287963313}
   edgeWallFolder: {fileID: 470817212}
+  baseWallYOffset: -1.1
+  edgeWallYOffset: 0
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
