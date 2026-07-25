@@ -307,9 +307,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Map
   baseWall: {fileID: 3828072292719234740, guid: 72783f42614f3c84bbfe8950d47cd056, type: 3}
+  breakableWall: {fileID: 3828072292719234740, guid: fdb1f065493d2594a8c0b801db8f4611, type: 3}
   edgeWall: {fileID: 4833792023383038177, guid: abaecec99ddc7a94987480edec085e90, type: 3}
   mainFloor: {fileID: 1377397544}
-  density: 0.35
+  wallDensity: 0.5
+  breakableWallDensity: 0.8
   wallFolder: {fileID: 1287963313}
   edgeWallFolder: {fileID: 470817212}
   baseWallYOffset: -4.4

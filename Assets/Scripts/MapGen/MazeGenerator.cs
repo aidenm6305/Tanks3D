@@ -5,8 +5,10 @@ using UnityEngine;
 public enum MazeCell
 {
     Wall,
+    BreakableWall,
     Path,
     Border
+
 }
 
 public class MazeGenerator
@@ -48,7 +50,7 @@ public class MazeGenerator
         return array;
     }
 
-    public List<List<MazeCell>> MazePath(int width = 7, int height = 7, int seed = 10000000, float density = 0.5f)
+    public List<List<MazeCell>> MazePath(int width = 7, int height = 7, int seed = 10000000, float wallDensity = 0.5f, float breakableWallDensity = 0.5f)
     {
         var rng = new System.Random(seed);
 
@@ -154,9 +156,14 @@ public class MazeGenerator
         {
             for (int j = 0; j < maze[i].Count; j++)
             {
-                if (maze[i][j] == MazeCell.Wall && rng.NextDouble() > density)
+                if (maze[i][j] == MazeCell.Wall && rng.NextDouble() > wallDensity)
                 {
                     maze[i][j] = MazeCell.Path;
+                }
+                else if (maze[i][j] == MazeCell.Wall && rng.NextDouble() < breakableWallDensity)
+                {
+                    Debug.Log($"Setting breakable wall at: {i}, {j}");
+                    maze[i][j] = MazeCell.BreakableWall;
                 }
             }
         }

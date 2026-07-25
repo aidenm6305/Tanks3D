@@ -23,20 +23,32 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
-        {
+        if (hasDoneDamage)
             return;
-        }
+        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
+            return;
 
+        hasDoneDamage = true;
         bulletParticleSystem.Play();
-        Debug.Log("Bullet collided with: " + collision.gameObject.name);
-        if (collision.gameObject.CompareTag("Player") && !hasDoneDamage)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            hasDoneDamage = true;
             PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(10f);
+            }
+        }
+        if (collision.gameObject.CompareTag("BreakableWall"))
+        {
+            Debug.Log($"Bullet collided with breakable wall at {collision.transform.position}");
+            BreakableWall breakableWall = collision.gameObject.GetComponent<BreakableWall>();
+            if (breakableWall != null)
+            {
+                breakableWall.BreakWall();
+            }
+            else
+            {
+                Debug.LogWarning("BreakableWall component not found on the collided object.");
             }
         }
         Destroy(gameObject, bulletParticleSystem.main.duration);
