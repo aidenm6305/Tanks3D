@@ -453,6 +453,13 @@ MonoBehaviour:
   edgeWallFolder: {fileID: 470817212}
   baseWallYOffset: -4.4
   edgeWallYOffset: -4.4
+  minSpawnTime: 1
+  maxSpawnTime: 1
+  startSpawnWaitTime: 1
+  bulletPickupPrefab: {fileID: 7906097596365977989, guid: 84bbd97e581312c4ea8eee13ca15d493, type: 3}
+  pickupBullets:
+  - {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
+  - {fileID: 4876094351857569163, guid: b4300cc1fa17ecd43947d67e448ca009, type: 3}
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
