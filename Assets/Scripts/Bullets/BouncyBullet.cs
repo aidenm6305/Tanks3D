@@ -20,11 +20,6 @@ public class BouncyBullet : Bullet
                 return;
         }
 
-        if (lastObjectHit != null && collision.gameObject == lastObjectHit)
-            return;
-
-        lastObjectHit = collision.gameObject;
-
         transform.forward = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
 
         HandleDamage(collision);
