@@ -4,9 +4,10 @@ public class Bullet : MonoBehaviour
 {
 
     public float speed = 30f;
-    private GameObject playerWhoShot;
+    protected GameObject playerWhoShot;
     private ParticleSystem bulletParticleSystem;
-    private bool hasDoneDamage = false;
+    protected bool hasDoneDamage = false;
+    private bool isBeingDestroyed = false;
     private void Start()
     {
         bulletParticleSystem = GetComponent<ParticleSystem>();
@@ -21,24 +22,18 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void HandleDamage(Collision collision)
     {
-        if (hasDoneDamage)
-            return;
-        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
-            return;
-
-        hasDoneDamage = true;
-        bulletParticleSystem.Play();
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(10f);
+                DestroyBullet();
             }
         }
-        if (collision.gameObject.CompareTag("BreakableWall"))
+        else if (collision.gameObject.CompareTag("BreakableWall"))
         {
             Debug.Log($"Bullet collided with breakable wall at {collision.transform.position}");
             BreakableWall breakableWall = collision.gameObject.GetComponent<BreakableWall>();
@@ -51,6 +46,22 @@ public class Bullet : MonoBehaviour
                 Debug.LogWarning("BreakableWall component not found on the collided object.");
             }
         }
+    }
+    protected void DestroyBullet()
+    {
+        if (isBeingDestroyed) return;
+        isBeingDestroyed = true;
+
+        bulletParticleSystem.Play();
         Destroy(gameObject, bulletParticleSystem.main.duration);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (hasDoneDamage)
+            return;
+        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
+            return;
+
+        hasDoneDamage = true;
     }
 }

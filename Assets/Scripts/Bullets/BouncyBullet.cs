@@ -1,0 +1,42 @@
+using UnityEngine;
+
+
+public class BouncyBullet : Bullet
+{
+
+    [SerializeField]
+    private int bounceCount = 3; 
+    private GameObject lastObjectHit = null;
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (playerWhoShot != null)
+        {
+            if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
+                return;
+        }
+
+        if (lastObjectHit != null && collision.gameObject == lastObjectHit)
+            return;
+
+        lastObjectHit = collision.gameObject;
+
+        transform.forward = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
+
+        HandleDamage(collision);
+
+        bounceCount--;
+        
+        if (bounceCount <= 0)
+        {
+            DestroyBullet();
+            return;
+        }
+        hasDoneDamage = false;
+        playerWhoShot = null;
+    }
+}
