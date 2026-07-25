@@ -5,9 +5,12 @@ public class Spawner : MonoBehaviour
     private List<Vector3> paths;
     private List<int> pickupIndexes = new List<int>();
     private float squareSize;
-    public Spawner(List<Vector3> paths, float squareSize)
+    List<Bullet> pickupBullets = new List<Bullet>();
+    public Spawner(List<Vector3> paths,List<Bullet> pickupBullets, float squareSize)
     {
+
         this.paths = paths;
+        this.pickupBullets = pickupBullets;
         this.squareSize = squareSize;
 
         for (int i = 0; i < paths.Count; i++)
@@ -15,7 +18,7 @@ public class Spawner : MonoBehaviour
             pickupIndexes.Add(i);
         }
     }
-    public void placePickup(Pickup obj, bool animate = false)
+    public void placePickup(BulletPickup obj, bool animate = false)
     {
         if (pickupIndexes.Count == 0)
         {
@@ -28,8 +31,8 @@ public class Spawner : MonoBehaviour
 
         spawnPosition.y = 0.0f;
 
-        Pickup item = Instantiate(obj, spawnPosition, Quaternion.identity);
-        item.SetSpawnIndexValue(pickupIndexes[tile], this);
+        BulletPickup item = Instantiate(obj, spawnPosition, Quaternion.identity);
+        item.SetSpawnIndexValue(pickupIndexes[tile], pickupBullets, this);
         pickupIndexes.RemoveAt(tile);
 
     }

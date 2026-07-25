@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using System.Text.RegularExpressions;
 
 public class Map : MonoBehaviour
 {
@@ -38,8 +37,9 @@ public class Map : MonoBehaviour
     [SerializeField] private float maxSpawnTime = 1f;
 
     [SerializeField] private float startSpawnWaitTime = 1f;
-    [SerializeField] private Pickup pickupPrefab;
+    [SerializeField] private BulletPickup bulletPickupPrefab;
     
+    [SerializeField] private List<Bullet> pickupBullets;
     // Instance fields
     private MazeGenerator mazeGenerator = new MazeGenerator();
 
@@ -146,12 +146,12 @@ public class Map : MonoBehaviour
 
     private IEnumerator SpawnPickups()
     {
-        spawner = new Spawner(pathLocations, Mathf.Min(wallScale.x, wallScale.z));
+        spawner = new Spawner(pathLocations, pickupBullets, Mathf.Min(wallScale.x, wallScale.z));
         Debug.Log($"Spawn area size: {Mathf.Min(wallScale.x, wallScale.z)}");
         yield return new WaitForSeconds(startSpawnWaitTime);
         while (true)
         {
-            spawner.placePickup(pickupPrefab, true);
+            spawner.placePickup(bulletPickupPrefab, true);
             float spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(spawnTime);
 
