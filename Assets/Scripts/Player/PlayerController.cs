@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Tank Rotation Settings")]
     [SerializeField] private Transform treadsTransform;
-    // Increased default rotation speed because it is now treated as degrees per second
     [SerializeField] private float rotationSpeed = 120f; 
 
-    //[SerializeField] private TextMeshProUGUI label;
+    [Header("Boost Settings")]
+    [SerializeField] private float maxBoostAmount = 100f;
+    [SerializeField] private float boostDepletionRate = 30f;
+    private float currentBoostAmount;
+    private bool isTryingToBoost = false;       
 
     private CharacterController controller;
     private Vector2 moveInput;
@@ -22,45 +26,83 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioSource moveSource;
 
+    [SerializeField]
+    private Slider boostSlider;
+
     private float speed;
+    private PlayerHealth playerHealth;
+    
     void Awake()
     {
+        playerHealth = GetComponentInParent<PlayerHealth>();
         speed = normalSpeed;
+        currentBoostAmount = maxBoostAmount;
         controller = GetComponent<CharacterController>();
+        
+        if (boostSlider != null)
+        {
+            boostSlider.value = currentBoostAmount / maxBoostAmount;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
+    
     public void Boost(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            speed = boostSpeed;
+            isTryingToBoost = true;
         }
         else if (context.canceled)
         {
-            speed = normalSpeed; 
+            isTryingToBoost = false;
         }
     }
 
-    //public void Jump(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed && controller.isGrounded)
-    //    {
-    //        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-    //    }
-    //}
+    private void HandleBoost()
+    {
+        if (isTryingToBoost && currentBoostAmount > 0)
+        {
+            speed = boostSpeed;
+            currentBoostAmount -= boostDepletionRate * Time.deltaTime;
+            
+            if (currentBoostAmount <= 0)
+            {
+                currentBoostAmount = 0;
+                speed = normalSpeed;
+            }
+        }
+        else
+        {
+            speed = normalSpeed;
+            if (currentBoostAmount < maxBoostAmount)
+            {
+                if (currentBoostAmount > maxBoostAmount)
+                {
+                    currentBoostAmount = maxBoostAmount;
+                }
+            }
+        }
 
-    //public void SetLabel(string label)
-    //{
-    //    this.label.text = label;
-    //}
+        if (boostSlider != null)
+        {
+            boostSlider.value = currentBoostAmount / maxBoostAmount;
+        }
+    }
 
     void Update()
-        //possibly add two variants of controls
     {
+        if (playerHealth != null && playerHealth.isDead)
+        {
+            AudioManager.Instance.StopMove(moveSource);
+            return;
+        }
+
+        HandleBoost();
+
         if (treadsTransform != null)
         {
             float turn = moveInput.x * rotationSpeed * Time.deltaTime;
