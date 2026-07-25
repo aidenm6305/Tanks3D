@@ -1,21 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Text.RegularExpressions;
 
 public class Map : MonoBehaviour
 {
 
     [Header("Prefabs")]
-    [Tooltip("The base wall prefab used for constructing the maze interior")]
+    [Tooltip("The base wall prefabs used for constructing the maze interior")]
     [SerializeField] private GameObject baseWall;
+    [SerializeField] private GameObject breakableWall;
     [Tooltip("The edge wall prefab used for the maze boundaries")]
     [SerializeField] private GameObject edgeWall;
     [Tooltip("The main floor prefab for the maze")]
     [SerializeField] private GameObject mainFloor;
 
 
+    [Header("Maze Generation Settings (Wall Density)")]
     [Range(0.001f, 1.0f)]
-    [SerializeField] float density = 0.5f;
+    [SerializeField] float wallDensity = 0.5f;
+    [Range(0.001f, 1.0f)]
+    [SerializeField] float breakableWallDensity = 0.5f;
     [Header("Folders")]
     [Tooltip("The folder to place the base walls in")]
     [SerializeField] private GameObject wallFolder;
@@ -62,22 +67,46 @@ public class Map : MonoBehaviour
 
         Debug.Log($"Floor Scale: {floorScale.x} x {floorScale.z}");
         Debug.Log($"Start Position: {startX}, {startZ}");
-        Debug.Log($"Density: {density}");
 
         // MazePath takes the interior size; the generator adds the outer border itself.
-        List<List<MazeCell>> maze = mazeGenerator.MazePath(cellCountX - 2, cellCountZ - 2, seed: UnityEngine.Random.Range(1, 10000000), density: density);
+        List<List<MazeCell>> maze = mazeGenerator.MazePath(
+            cellCountX - 2,
+            cellCountZ - 2,
+            seed: UnityEngine.Random.Range(1, 10000000),
+            wallDensity: wallDensity,
+            breakableWallDensity: breakableWallDensity
+        );
+
         float wallHeight = wallScale.y / 2f;
 
         foreach (List<MazeCell> row in maze)
         {
             foreach (MazeCell cell in row)
             {
-                if (cell == MazeCell.Wall || cell == MazeCell.Border)
+                if (cell != MazeCell.Path)
                 {
 
-                    GameObject wallToInstantiate = (cell == MazeCell.Border) ? edgeWall : baseWall;
+                    GameObject wallToInstantiate; 
+                    switch (cell)
+                    {
+                        case MazeCell.Wall:
+                            wallToInstantiate = baseWall;
+                            break;
+                        case MazeCell.BreakableWall:
+                            Debug.Log($"Instantiating breakable wall at: {itterX}, {itterZ}");
+                            wallToInstantiate = breakableWall;
+                            break;
+                        case MazeCell.Border:
+                            wallToInstantiate = edgeWall;
+                            break;
+                        default:
+                            wallToInstantiate = baseWall;
+                            break;
+                    }
+
                     GameObject folder = (cell == MazeCell.Border) ? edgeWallFolder : wallFolder;
                     float yOffset = (cell == MazeCell.Border) ? edgeWallYOffset : baseWallYOffset;
+
                     var tempWall = Instantiate(
                         wallToInstantiate,
                         new Vector3(itterX * wallScale.x - wallScale.x, wallHeight + yOffset, itterZ * wallScale.z - wallScale.z),
