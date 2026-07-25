@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public float speed = 30f;
     private GameObject playerWhoShot;
     private ParticleSystem bulletParticleSystem;
+    private bool hasDoneDamage = false;
     private void Start()
     {
         bulletParticleSystem = GetComponent<ParticleSystem>();
@@ -29,8 +30,9 @@ public class Bullet : MonoBehaviour
 
         bulletParticleSystem.Play();
         Debug.Log("Bullet collided with: " + collision.gameObject.name);
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !hasDoneDamage)
         {
+            hasDoneDamage = true;
             PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
             if (playerHealth != null)
             {
