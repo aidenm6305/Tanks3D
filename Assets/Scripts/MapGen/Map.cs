@@ -21,7 +21,9 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject wallFolder;
     [Tooltip("The folder to place the edge walls in")]
     [SerializeField] private GameObject edgeWallFolder;
-
+    [Tooltip("The offset for the wall's Y position")]
+    [SerializeField] private float baseWallYOffset = 0; 
+    [SerializeField] private float edgeWallYOffset = 0; 
     // Instance fields
     private MazeGenerator mazeGenerator = new MazeGenerator();
 
@@ -75,9 +77,10 @@ public class Map : MonoBehaviour
 
                     GameObject wallToInstantiate = (cell == MazeCell.Border) ? edgeWall : baseWall;
                     GameObject folder = (cell == MazeCell.Border) ? edgeWallFolder : wallFolder;
+                    float yOffset = (cell == MazeCell.Border) ? edgeWallYOffset : baseWallYOffset;
                     var tempWall = Instantiate(
                         wallToInstantiate,
-                        new Vector3(itterX * wallScale.x - wallScale.x, wallHeight, itterZ * wallScale.z - wallScale.z),
+                        new Vector3(itterX * wallScale.x - wallScale.x, wallHeight + yOffset, itterZ * wallScale.z - wallScale.z),
                         Quaternion.identity,
                         folder.transform
                     );
