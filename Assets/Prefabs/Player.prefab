@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &371327607540455799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342403044544151038}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342403044544151038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371327607540455799}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7634834716133574963}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704035169483905869
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +47,7 @@ GameObject:
   - component: {fileID: 7481973441920498574}
   - component: {fileID: 2950581188337304518}
   - component: {fileID: 8436879323778115536}
+  - component: {fileID: 8955986481235118645}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -159,7 +191,19 @@ MonoBehaviour:
     m_ActionId: 68113bf3-d4cd-4c87-82ed-8c93f30e3661
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8955986481235118645}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8decb409-cc1c-48d0-96b7-056fbb23d792
     m_ActionName: 'Gameplay/Shoot[/Mouse/leftButton]'
   - m_PersistentCalls:
@@ -236,6 +280,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SplitScreenCameraSetup
   playerBrain: {fileID: 3598562384108977207}
   playerVirtualCam: {fileID: 4260900308207528190}
+--- !u!114 &8955986481235118645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704035169483905869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5727fee723fb44b9865f8c51191329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
+  bullet: {fileID: 7816058691495053140, guid: 93ecbe9014600a2429905005f2b3fd93, type: 3}
+  muzzleTransform: {fileID: 342403044544151038}
 --- !u!1 &3886664504221716287
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +326,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 342403044544151038}
   - {fileID: 2158171308947482773}
   - {fileID: 3540230341095860970}
   m_Father: {fileID: 2791187964986827051}
@@ -550,8 +609,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8514837280520801700}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14925998, y: -0.19093463, z: 0.029388126, w: 0.96974313}
-  m_LocalPosition: {x: 0.8456868, y: 1.5835321, z: -3.3422656}
+  m_LocalRotation: {x: 0.15212339, y: 0, z: 0, w: 0.98836154}
+  m_LocalPosition: {x: 0, y: 1.5035291, z: -4.7685847}
   m_LocalScale: {x: 2, y: 3.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,6 +766,6 @@ MonoBehaviour:
   cannon: {fileID: 3886664504221716287}
   cinemachineCamera: {fileID: 4260900308207528190}
   rotationSpeed: 100
-  verticalRotationSpeed: 50
+  verticalRotationSpeed: 0
   minVerticalAngle: -30
   maxVerticalAngle: 30
