@@ -16,6 +16,5 @@ public class PlayerShoot: MonoBehaviour
                     muzzleTransform.rotation
                     );
         tempBullet.SetPlayerWhoShot(gameObject);
-        //Debug.Log("Shoot");
     }
 }

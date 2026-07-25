@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5727fee723fb44b9865f8c51191329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
-  bullet: {fileID: 7816058691495053140, guid: 93ecbe9014600a2429905005f2b3fd93, type: 3}
+  bullet: {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
   muzzleTransform: {fileID: 342403044544151038}
 --- !u!1 &2174890424045544445
 GameObject:
