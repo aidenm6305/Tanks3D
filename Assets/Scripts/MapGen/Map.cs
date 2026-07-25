@@ -16,6 +16,7 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject mainFloor;
 
 
+    [Header("Maze Generation Settings (Wall Density)")]
     [Range(0.001f, 1.0f)]
     [SerializeField] float wallDensity = 0.5f;
     [Range(0.001f, 1.0f)]
