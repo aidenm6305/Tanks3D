@@ -16,8 +16,14 @@ public class BulletPickup : MonoBehaviour
 
         int randomIndex = Random.Range(0, pickupBullets.Count);
         bullet = pickupBullets[randomIndex];
+        Color bulletColor = bullet.bulletColor;
+        var meshRender = GetComponent<MeshRenderer>();
+        var mesh = meshRender.materials[0];
+        Material clonedTexture = Instantiate(mesh);
+        clonedTexture.color = bulletColor;
+        meshRender.material = clonedTexture;
     } 
-
+    
 
     public void SetSpawnIndexValue(int index, List<Bullet> pickupBullets, Spawner spawner)
     {
