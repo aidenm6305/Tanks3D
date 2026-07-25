@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] private GameObject cannon;
+    [SerializeField] private GameObject turret;
     [SerializeField] private CinemachineCamera cinemachineCamera;
 
     [Header("Camera Settings")]
@@ -16,6 +17,7 @@ public class PlayerCamera : MonoBehaviour
     private float horizontalAngle = 0f;
     private float verticalAngle = 0f;
     private Transform cannonTransform;
+    private Transform turretTransform;
 
     private Vector2 lookInput;
 
@@ -27,6 +29,12 @@ public class PlayerCamera : MonoBehaviour
 
         if (cannon != null)
             cannonTransform = cannon.transform;
+
+        if (turret == null)
+            Debug.LogWarning("No Turret attached");
+
+        if (turret != null)
+            turretTransform = turret.transform;
 
         if (cinemachineCamera == null)
             cinemachineCamera = GetComponent<CinemachineCamera>();
@@ -58,14 +66,12 @@ public class PlayerCamera : MonoBehaviour
         if (cannonTransform == null)
             return;
 
-        // Apply horizontal rotation to cannon body
         cannonTransform.rotation = Quaternion.Euler(0, horizontalAngle, 0);
 
-        // If cannon has a turret child, apply vertical rotation to it
-        if (cannonTransform.childCount > 0)
-        {
-            Transform turret = cannonTransform.GetChild(0);
-            turret.localRotation = Quaternion.Euler(verticalAngle, 0, 0);
-        }
+
+        if (turretTransform == null)
+            return;
+        
+        turretTransform.localRotation = Quaternion.Euler(verticalAngle, 0, 0);
     }
 }

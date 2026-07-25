@@ -22,13 +22,21 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == playerWhoShot)
+        if (collision.gameObject == playerWhoShot || collision.transform.IsChildOf(playerWhoShot.transform))
         {
             return;
         }
+
         bulletParticleSystem.Play();
         Debug.Log("Bullet collided with: " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(10f);
+            }
+        }
         Destroy(gameObject, bulletParticleSystem.main.duration);
-        
     }
 }
