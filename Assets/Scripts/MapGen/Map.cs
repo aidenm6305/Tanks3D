@@ -47,6 +47,7 @@ public class Map : MonoBehaviour
 
     // Instance fields
     private MazeGenerator mazeGenerator = new MazeGenerator();
+    private GameManager gameManager;
 
     int startX;
     int startZ;
@@ -69,6 +70,7 @@ public class Map : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
 
         wallScale = GetWorldSize(baseWall);
         floorScale = GetWorldSize(mainFloor);
@@ -167,10 +169,16 @@ public class Map : MonoBehaviour
         yield return new WaitForSeconds(startSpawnWaitTime);
         while (true)
         {
+            if (gameManager.isGameActive == true)
+            {
             spawner.placePickup(bulletPickupPrefab, true);
             float spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(spawnTime);
-
+            } 
+            else
+            {
+                yield return new WaitForSeconds(2f);
+            }
         }
     }
 

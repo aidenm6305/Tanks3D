@@ -165,6 +165,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   bulletColor: {r: 1, g: 0, b: 0, a: 1}
   visualTransform: {fileID: 7263604358388241088}
+  bulletName: Fast Bullet
   speed: 60
 --- !u!54 &7299392321627209723
 Rigidbody:

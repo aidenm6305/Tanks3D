@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] 
     protected Transform visualTransform; 
-    protected string bulletName = "Normal Bullet";
+    public string bulletName = "Normal Bullet";
     public float speed = 30f;
     protected GameObject playerWhoShot;
     private ParticleSystem bulletParticleSystem;

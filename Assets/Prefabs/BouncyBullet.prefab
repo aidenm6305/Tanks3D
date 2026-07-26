@@ -4995,5 +4995,6 @@ MonoBehaviour:
   icon: {fileID: 0}
   bulletColor: {r: 0, g: 0, b: 1, a: 1}
   visualTransform: {fileID: 7263604358388241088}
+  bulletName: Bouncy Bullet
   speed: 30
   bounceCount: 3

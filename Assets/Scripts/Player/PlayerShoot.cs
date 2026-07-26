@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,7 +21,10 @@ public class PlayerShoot: MonoBehaviour
     private bool isOnFancyBullet;
     private float fancyBulletTimer;
     private PlayerHealth playerHealth;
-    private Bullet normalBullet; 
+    private Bullet normalBullet;
+
+    [SerializeField]
+    private TextMeshProUGUI bulletTypeText;
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class PlayerShoot: MonoBehaviour
         fancyBulletTimer = bulletResetTime;
         StartCoroutine(HandleBulletReset());
         bullet = newBullet;
+        bulletTypeText.text = newBullet.bulletName;
     }
     private System.Collections.IEnumerator HandleCooldown()
     {
@@ -89,7 +94,7 @@ public class PlayerShoot: MonoBehaviour
         }
 
         bullet = normalBullet;
-
+        bulletTypeText.text = normalBullet.bulletName;
     }
     public void Shoot(InputAction.CallbackContext context)
     {

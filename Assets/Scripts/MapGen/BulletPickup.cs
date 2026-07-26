@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 public class BulletPickup : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 50f;
     private Spawner spawner;
     private List<Bullet> pickupBullets = new List<Bullet>();
     private int spawnIndex;
-    private Bullet bullet; 
+    private Bullet bullet;
     private void SetRandomPickup()
     {
         if (pickupBullets.Count == 0)
