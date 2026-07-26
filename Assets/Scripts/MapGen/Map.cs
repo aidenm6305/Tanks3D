@@ -40,6 +40,11 @@ public class Map : MonoBehaviour
     [SerializeField] private BulletPickup bulletPickupPrefab;
     
     [SerializeField] private List<Bullet> pickupBullets;
+    
+    [Header("Object Spawn Settings")]
+    [SerializeField] int maxItemsToSpawn = 20; 
+    [SerializeField] List<GameObject> spawnableObjects; 
+
     // Instance fields
     private MazeGenerator mazeGenerator = new MazeGenerator();
 
@@ -143,7 +148,14 @@ public class Map : MonoBehaviour
             itterX = startX;
             itterZ -= 1;
         }
+        spawner = new Spawner(pathLocations, pickupBullets, Mathf.Min(wallScale.x, wallScale.z));
+        for (int i = 0; i < maxItemsToSpawn; i++)
+        {
+            GameObject randomObject = spawnableObjects[UnityEngine.Random.Range(0, spawnableObjects.Count)];
+            spawner.placeItem(randomObject);
+        }
         StartCoroutine(SpawnPickups());
+        
     }
 
 
