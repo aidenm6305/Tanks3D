@@ -21,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
     private float upsideDownTimer = 0f;
     private const float selfDestructTime = 5f;
 
+    [SerializeField]
+    private ParticleSystem deathParticleEffect;
+
     private void Start()
     {
         deathScreen.SetActive(false);
@@ -35,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.playersAlive++;
         gameManager.totalPlayersJoined++;
+        deathParticleEffect.Stop();
     }
 
     private void Update()
@@ -110,6 +114,8 @@ public class PlayerHealth : MonoBehaviour
 
         deathScreen.SetActive(true);
         gameManager.playersAlive--;
+        // call particle effect for death
+        deathParticleEffect.Play();
     }
 
     public void ShowWinScreen()

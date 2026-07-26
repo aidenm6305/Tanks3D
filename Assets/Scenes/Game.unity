@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time
+  m_text: PRESS A TO START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18aee69bf564a4946b9d2baa5f38ad0c, type: 2}
   m_sharedMaterial: {fileID: 5689633770893621978, guid: 18aee69bf564a4946b9d2baa5f38ad0c, type: 2}
@@ -319,7 +319,7 @@ MonoBehaviour:
   playersAlive: 0
   totalPlayersJoined: 0
   isGameActive: 0
-  countdownDuration: 5
+  countdownDuration: 10
   countdownText: {fileID: 304802598}
 --- !u!4 &317727939
 Transform:
