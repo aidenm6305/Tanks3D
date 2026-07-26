@@ -961,6 +961,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3730386961669003505}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8000007237166438476, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8948279286518188818}
     - targetCorrespondingSourceObject: {fileID: 704035169483905869, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8935578192178054778}
@@ -1039,6 +1042,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7634834716133574963, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
   m_PrefabInstance: {fileID: 847682931286061283}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7261543198213515439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8000007237166438476, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
+  m_PrefabInstance: {fileID: 847682931286061283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8948279286518188818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261543198213515439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7c5c8403e64454e8db4984fca1eee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRotation
+  transformsToLookAtZeroZero:
+  - {fileID: 7067274875958753030}
+  - {fileID: 7833306869128877247}
 --- !u!4 &7833306869128877247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7455405970340602972, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}

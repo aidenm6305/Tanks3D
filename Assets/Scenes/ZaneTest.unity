@@ -504,8 +504,11 @@ MonoBehaviour:
   startSpawnWaitTime: 1
   bulletPickupPrefab: {fileID: 7906097596365977989, guid: 84bbd97e581312c4ea8eee13ca15d493, type: 3}
   pickupBullets:
-  - {fileID: 4876094351857569163, guid: b4300cc1fa17ecd43947d67e448ca009, type: 3}
-  - {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
+  - {fileID: 7816058691495053140, guid: bd6a49637a975de49aaaa01a2766c7d6, type: 3}
+  - {fileID: 1147425803730118220, guid: ac3d30f3d94692d4cb38b223e1ceeed5, type: 3}
+  maxItemsToSpawn: 20
+  spawnableObjects:
+  - {fileID: 4376335821020131863, guid: 8eadcc3eed09b1f49ba53b697ae89d3e, type: 3}
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
@@ -597,7 +600,7 @@ Transform:
   m_GameObject: {fileID: 858549833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 0, z: -24}
+  m_LocalPosition: {x: -27, y: 0, z: -27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -676,7 +679,7 @@ Transform:
   m_GameObject: {fileID: 939539758}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24, y: 0, z: 24}
+  m_LocalPosition: {x: 27, y: 0, z: 27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
