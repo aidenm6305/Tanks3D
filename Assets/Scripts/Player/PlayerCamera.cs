@@ -79,8 +79,7 @@ public class PlayerCamera : MonoBehaviour
         if (cannonTransform == null)
             return;
 
-        cannonTransform.rotation = Quaternion.Euler(0, horizontalAngle, 0);
-
+        cannonTransform.localRotation = Quaternion.Euler(0, horizontalAngle, 0);
 
         if (turretTransform == null)
             return;

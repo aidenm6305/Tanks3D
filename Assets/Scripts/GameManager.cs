@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
         totalPlayersJoined = 0;
         gameEnded = false;
         isGameActive = false;
+        currentCountdown = countdownDuration;
+        countdownText.gameObject.SetActive(true);
     }
 
     void Update()
@@ -38,7 +40,6 @@ public class GameManager : MonoBehaviour
         {
             currentCountdown -= Time.deltaTime;
 
-            // Optional: Update a UI Text here to show the countdown to players
             countdownText.text = Mathf.Ceil(currentCountdown).ToString();
             
             if (currentCountdown <= 0)
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
                 isGameActive = true;
                 isCountingDown = false;
                 Debug.Log("Game Started!");
+                countdownText.gameObject.SetActive(false);
             }
         }
 
