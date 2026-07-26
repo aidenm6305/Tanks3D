@@ -8,6 +8,9 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     public Color bulletColor = Color.white;
+
+    [SerializeField] 
+    protected Transform visualTransform; 
     protected string bulletName = "Normal Bullet";
     public float speed = 30f;
     protected GameObject playerWhoShot;
@@ -20,7 +23,7 @@ public class Bullet : MonoBehaviour
         bulletParticleSystem = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
 
-        var meshRender = GetComponent<MeshRenderer>();
+        var meshRender = GetComponentInChildren<MeshRenderer>();
         var mesh = meshRender.materials[0];
         Material clonedTexture = Instantiate(mesh);
         clonedTexture.color = bulletColor;
@@ -35,6 +38,13 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        visualTransform.rotation = Quaternion.LookRotation(rb.linearVelocity.normalized, transform.forward);
+        Debug.DrawRay(visualTransform.position, visualTransform.forward * 2f, Color.red);
+        if(transform.position.y < -10f)
+        {
+            DestroyBullet();
+        }
     }
 
     protected void HandleDamage(Collision collision)

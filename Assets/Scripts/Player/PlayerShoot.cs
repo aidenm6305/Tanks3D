@@ -13,16 +13,25 @@ public class PlayerShoot: MonoBehaviour
     [SerializeField] private float fireCooldownTime = 1f;
     [SerializeField] private Image cooldownImage;
 
+    [Header("Fancy Bullet Settings")]
+    [SerializeField] private float bulletResetTime = 5f;
+    [SerializeField] private Image bulletResetImage;
     private bool isOnCooldown;
+    private bool isOnFancyBullet;
+    private float fancyBulletTimer;
     private PlayerHealth playerHealth;
+    private Bullet normalBullet; 
 
     private void Awake()
     {
         playerHealth = GetComponentInParent<PlayerHealth>();
+        normalBullet = bullet;
     }
 
     public void SetNewBullet(Bullet newBullet)
     {
+        fancyBulletTimer = bulletResetTime;
+        StartCoroutine(HandleBulletReset());
         bullet = newBullet;
     }
     private System.Collections.IEnumerator HandleCooldown()
@@ -54,7 +63,34 @@ public class PlayerShoot: MonoBehaviour
 
         isOnCooldown = false;
     }
+    private System.Collections.IEnumerator HandleBulletReset()
+    {
 
+        if (bulletResetImage != null)
+        {
+            bulletResetImage.fillAmount = 0f;
+        }
+
+        while (fancyBulletTimer > 0f)
+        {
+            fancyBulletTimer -= Time.deltaTime;
+
+            if (bulletResetImage != null)
+            {
+                bulletResetImage.fillAmount = 1f - (fancyBulletTimer / bulletResetTime);
+            }
+
+            yield return null;
+        }
+
+        if (bulletResetImage != null)
+        {
+            bulletResetImage.fillAmount = 1f;
+        }
+
+        bullet = normalBullet;
+
+    }
     public void Shoot(InputAction.CallbackContext context)
     {
         if (playerHealth != null && playerHealth.isDead) return;

@@ -337,7 +337,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cdc46f05a7ede4f87bb55726569fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputManager
-  playerPrefab: {fileID: 8000007237166438476, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
+  playerPrefab: {fileID: 7261543198213515439, guid: 780e4b270af7b994ab08f332a3b2a869, type: 3}
   spawnPoints:
   - {fileID: 939539759}
   - {fileID: 858549834}

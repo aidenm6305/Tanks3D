@@ -6,12 +6,6 @@ public class BouncyBullet : Bullet
 
     [SerializeField]
     private int bounceCount = 3; 
-    private GameObject lastObjectHit = null;
-    private void Update()
-    {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (playerWhoShot != null)
@@ -21,7 +15,6 @@ public class BouncyBullet : Bullet
         }
 
         transform.forward = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
-
         HandleDamage(collision);
 
         bounceCount--;
