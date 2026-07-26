@@ -80,7 +80,7 @@ public class PlayerInputManager : MonoBehaviour
             Debug.LogWarning($"Not enough spawn points for player {playerIndex + 1}. Using default position.");
         }
         Debug.Log(spawnPoints.Length);
-        
+
         player.GetComponent<Renderer>().material.color = GetRandomColor();
         var color = GetRandomColor();
         foreach (var mesh in player.GetComponentsInChildren<MeshRenderer>())
