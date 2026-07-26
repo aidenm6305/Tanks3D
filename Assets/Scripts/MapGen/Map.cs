@@ -95,6 +95,10 @@ public class Map : MonoBehaviour
         {
             foreach (MazeCell cell in row)
             {
+                if (cell == MazeCell.Border)
+                {
+                    continue; 
+                }
                 float yOffset = (cell == MazeCell.Border) ? edgeWallYOffset : baseWallYOffset;
                 if (cell != MazeCell.Path)
                 {

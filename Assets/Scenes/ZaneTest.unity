@@ -504,8 +504,8 @@ MonoBehaviour:
   startSpawnWaitTime: 1
   bulletPickupPrefab: {fileID: 7906097596365977989, guid: 84bbd97e581312c4ea8eee13ca15d493, type: 3}
   pickupBullets:
-  - {fileID: 4876094351857569163, guid: b4300cc1fa17ecd43947d67e448ca009, type: 3}
-  - {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
+  - {fileID: 7816058691495053140, guid: bd6a49637a975de49aaaa01a2766c7d6, type: 3}
+  - {fileID: 1147425803730118220, guid: ac3d30f3d94692d4cb38b223e1ceeed5, type: 3}
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
