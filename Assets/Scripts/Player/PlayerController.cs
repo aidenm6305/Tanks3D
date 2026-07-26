@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float normalSpeed = 5f;
     
     [SerializeField] private float boostSpeed = 10f;
-    [SerializeField] private float gravity = -9.8f;
 
     [Header("Tank Rotation Settings")]
     [SerializeField] private Transform treadsTransform;
@@ -19,9 +18,9 @@ public class PlayerController : MonoBehaviour
     private float currentBoostAmount;
     private bool isTryingToBoost = false;       
 
-    private CharacterController controller;
+    private Rigidbody rb;
     private Vector2 moveInput;
-    private Vector3 velocity;
+    public Vector2 MoveInput => moveInput;
 
     [SerializeField]
     private AudioSource moveSource;
@@ -37,7 +36,7 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponentInParent<PlayerHealth>();
         speed = normalSpeed;
         currentBoostAmount = maxBoostAmount;
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         
         if (boostSlider != null)
         {
@@ -103,24 +102,12 @@ public class PlayerController : MonoBehaviour
 
         HandleBoost();
 
-        if (treadsTransform != null)
+        if (treadsTransform != null)    
         {
             float turn = moveInput.x * rotationSpeed * Time.deltaTime;
             treadsTransform.Rotate(Vector3.up, turn);
-
-            Vector3 move = treadsTransform.forward * moveInput.y;
-            controller.Move(move * speed * Time.deltaTime);
         }
-
-        velocity.y += gravity * Time.deltaTime;
-        
-        if (controller.isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f; 
-        }
-
-        controller.Move(velocity * Time.deltaTime);
-
+    
         if (moveInput.magnitude > 0)
         {
             AudioManager.Instance.PlayMove(moveSource);
@@ -128,6 +115,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             AudioManager.Instance.StopMove(moveSource);
+        }
+    }
+
+    void FixedUpdate() 
+    {
+        if (playerHealth != null && playerHealth.isDead) return;
+
+        if (treadsTransform != null && rb != null)
+        {
+            Vector3 targetVelocity = treadsTransform.forward * moveInput.y * speed;
+            targetVelocity.y = rb.linearVelocity.y;
+            rb.linearVelocity = targetVelocity;
         }
     }
 }

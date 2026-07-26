@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_TankTread
+  m_Name: m_TankTreadRight
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -31,7 +31,7 @@ Material:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 1a85118d08961c0459cee82b7208293c, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0.50271094, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: f5cead254e7ea3044be8adf6b682f903, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,7 +55,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 1a85118d08961c0459cee82b7208293c, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0.50271094, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: a2562933487165d4ca6bdd3a9a1e72e0, type: 3}
         m_Scale: {x: 1, y: 1}

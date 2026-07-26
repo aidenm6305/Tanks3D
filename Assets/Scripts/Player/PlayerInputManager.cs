@@ -51,13 +51,26 @@ public class PlayerInputManager : MonoBehaviour
         {
             Debug.Log($"Spawning player {playerIndex + 1} at spawn point {playerIndex}");
             var spawnPoint = spawnPoints[playerIndex];
-            var characterController = player.GetComponent<CharacterController>();
 
-            characterController.enabled = false;
+            // 1. Disable CharacterController if it was accidentally left on the prefab
+            var cc = player.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
 
+            // 2. Teleport the transform
             player.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
-            characterController.enabled = true;
+            // 3. Force Rigidbody to update immediately (fixes physics snap-back/interpolation bugs)
+            var rb = player.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.position = spawnPoint.position;
+                rb.rotation = spawnPoint.rotation;
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            // 1b. Re-enable CharacterController if it existed
+            if (cc != null) cc.enabled = true;
 
             Debug.Log($"Player {playerIndex + 1} spawned at position: {player.transform.position}");
 
@@ -84,6 +97,6 @@ public class PlayerInputManager : MonoBehaviour
 
     private static Color GetRandomColor()
     {
-        return new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        return new Color(Random.Range(0.25f, 0.5f), Random.Range(0.25f, 0.5f), Random.Range(0.25f, 0.5f));
     }
 }
