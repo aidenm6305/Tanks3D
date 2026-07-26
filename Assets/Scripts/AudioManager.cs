@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     {
         if (source != null && moveClip != null && !source.isPlaying)
         {
+            source.pitch = .85f;
             source.clip = moveClip;
             source.Play();
         }
@@ -43,6 +44,7 @@ public class AudioManager : MonoBehaviour
     {
         if (source != null && rotateClip != null && !source.isPlaying)
         {
+            source.pitch = .85f;
             source.clip = rotateClip;
             source.Play();
         }
@@ -60,6 +62,7 @@ public class AudioManager : MonoBehaviour
     {
         if (source != null && shootClip != null)
         {
+            source.pitch = Random.Range(0.7f, .9f);
             source.PlayOneShot(shootClip);
         }
     }
@@ -68,6 +71,7 @@ public class AudioManager : MonoBehaviour
     {
         if (source != null && reloadClip != null)
         {
+            source.pitch = Random.Range(0.9f, 1.1f);
             source.PlayOneShot(reloadClip);
         }
     }

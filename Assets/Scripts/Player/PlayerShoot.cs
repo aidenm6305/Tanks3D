@@ -9,6 +9,8 @@ public class PlayerShoot: MonoBehaviour
     [SerializeField] private Transform muzzleTransform;
 
     public AudioSource myTankAudioSource;
+    public AudioSource myTankAudioSource2;
+
 
     [Header("Cooldown Settings")]
     [SerializeField] private float fireCooldownTime = 1f;
@@ -43,6 +45,7 @@ public class PlayerShoot: MonoBehaviour
     {
         isOnCooldown = true;
         float timer = fireCooldownTime;
+        bool playedReloadSound = false;
 
         if (cooldownImage != null)
         {
@@ -56,8 +59,12 @@ public class PlayerShoot: MonoBehaviour
             if (cooldownImage != null)
             {
                 cooldownImage.fillAmount = 1f - (timer / fireCooldownTime);
+                if (1f - (timer / fireCooldownTime) >= .5f && !playedReloadSound)
+                {
+                    playedReloadSound = true;
+                    AudioManager.Instance.PlayReload(myTankAudioSource2);
+                }
             }
-
             yield return null;
         }
 
@@ -107,7 +114,9 @@ public class PlayerShoot: MonoBehaviour
             return;
 
         if (isOnCooldown)
+        {
             return;
+        }
 
         StartCoroutine(HandleCooldown());
 
@@ -117,6 +126,6 @@ public class PlayerShoot: MonoBehaviour
                     muzzleTransform.rotation
                     );
         tempBullet.SetPlayerWhoShot(gameObject);
-        AudioManager.Instance.PlayShoot(myTankAudioSource);
+        AudioManager.Instance.PlayShoot(myTankAudioSource); 
     }
 }
