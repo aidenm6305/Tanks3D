@@ -1,3 +1,4 @@
+using System.Timers;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -86,5 +87,21 @@ public class GameManager : MonoBehaviour
                 player.ShowWinScreen();
             }
         }
+        StartCoroutine(StartNewRound());
+    }
+
+    public System.Collections.IEnumerator StartNewRound() {
+        float elapsedTime = 0f;
+        float duration = 5f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            countdownText.gameObject.SetActive(true);
+            countdownText.text = $"New Round Starting in {Mathf.Ceil(duration - elapsedTime)}";
+            yield return null;
+        }
+        countdownText.gameObject.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }
