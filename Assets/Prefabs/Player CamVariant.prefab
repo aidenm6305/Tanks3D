@@ -777,6 +777,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5825378475859584773, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6249781475069772738, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1054,14 +1058,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7261543198213515439}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc7c5c8403e64454e8db4984fca1eee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRotation
-  transformsToLookAtZeroZero:
-  - {fileID: 7067274875958753030}
-  - {fileID: 7833306869128877247}
 --- !u!4 &7833306869128877247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7455405970340602972, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
