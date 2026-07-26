@@ -453,6 +453,13 @@ MonoBehaviour:
   edgeWallFolder: {fileID: 470817212}
   baseWallYOffset: -4.4
   edgeWallYOffset: -4.4
+  minSpawnTime: 1
+  maxSpawnTime: 1
+  startSpawnWaitTime: 1
+  bulletPickupPrefab: {fileID: 7906097596365977989, guid: 84bbd97e581312c4ea8eee13ca15d493, type: 3}
+  pickupBullets:
+  - {fileID: -2246989145388903609, guid: e36137c3afba5e2418b0886fd2e73f35, type: 3}
+  - {fileID: 4876094351857569163, guid: b4300cc1fa17ecd43947d67e448ca009, type: 3}
 --- !u!4 &810528635
 Transform:
   m_ObjectHideFlags: 0
@@ -803,7 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cdc46f05a7ede4f87bb55726569fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputManager
-  playerPrefab: {fileID: 8000007237166438476, guid: f9bdd16610e30c0419cc617b727537cd, type: 3}
+  playerPrefab: {fileID: 7261543198213515439, guid: 780e4b270af7b994ab08f332a3b2a869, type: 3}
   spawnPoints:
   - {fileID: 939539759}
   - {fileID: 858549834}
