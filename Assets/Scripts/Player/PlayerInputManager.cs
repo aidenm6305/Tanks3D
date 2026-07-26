@@ -91,7 +91,14 @@ public class PlayerInputManager : MonoBehaviour
             }
             mesh.material.color = color;
         }
+        
         nextPlayerIndex++;
+
+        // Notify GameManager to start/reset the countdown
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnPlayerJoined();
+        }
     }
 
 

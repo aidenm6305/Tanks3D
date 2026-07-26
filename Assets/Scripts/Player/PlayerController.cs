@@ -94,6 +94,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Prevent movement inputs if the game hasn't started yet
+        if (GameManager.Instance != null && !GameManager.Instance.isGameActive) return;
+
         if (playerHealth != null && playerHealth.isDead)
         {
             AudioManager.Instance.StopMove(moveSource);
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleBoost();
-
+    
         if (treadsTransform != null)    
         {
             float turn = moveInput.x * rotationSpeed * Time.deltaTime;
@@ -120,6 +123,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() 
     {
+        // Stop physics movement during countdown
+        if (GameManager.Instance != null && !GameManager.Instance.isGameActive) return;
+
         if (playerHealth != null && playerHealth.isDead) return;
 
         if (treadsTransform != null && rb != null)

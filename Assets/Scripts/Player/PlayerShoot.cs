@@ -93,6 +93,9 @@ public class PlayerShoot: MonoBehaviour
     }
     public void Shoot(InputAction.CallbackContext context)
     {
+        // Prevent shooting if the game hasn't started yet
+        if (GameManager.Instance != null && !GameManager.Instance.isGameActive) return;
+
         if (playerHealth != null && playerHealth.isDead) return;
 
         if (!context.performed)
