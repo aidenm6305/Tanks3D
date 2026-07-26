@@ -72,6 +72,10 @@ public class PlayerInputManager : MonoBehaviour
         var color = GetRandomColor();
         foreach (var mesh in player.GetComponentsInChildren<MeshRenderer>())
         {
+            if (mesh.name == "SM_TankTread" || mesh.name == "sm_TreadWheelGroup" || mesh.name == "SM_TankTread (1)" || mesh.name == "sm_TreadWheelGroup (1)")
+            {
+                continue; // Skip the tank wheels
+            }
             mesh.material.color = color;
         }
         nextPlayerIndex++;
